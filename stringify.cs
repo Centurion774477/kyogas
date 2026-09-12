@@ -43,11 +43,11 @@ class Stringify
         KyogasSnippets.Add(stringToStore);
     }
 
-    private static void WriteSnippets()
+    private static void WriteSnippets(string fileName)
     {
         try 
         {
-            File.WriteAllLines("data.kyo", KyogasSnippets);
+            File.WriteAllLines(fileName, KyogasSnippets);
         } 
         catch 
         {
@@ -56,7 +56,7 @@ class Stringify
         
     }
     
-    public static void Process<TKey, TValue>(IDictionary<TKey, TValue> csharpObject)
+    public static void Process<TKey, TValue>(IDictionary<TKey, TValue> csharpObject, string fileName)
     {
         if (csharpObject.Count == 0)
         {
@@ -86,6 +86,8 @@ class Stringify
                 StoreString(parsedString);
             }
         }
+
+        WriteSnippets(fileName);
     }
 }
 
